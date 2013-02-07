@@ -1,0 +1,9 @@
+[user]
+	name = SLOBY
+	email = szabolcs.maj@gmail.com
+[alias]
+	st = status
+	co = checkout
+	df = diff
+	ci = commit
+	br = branch
