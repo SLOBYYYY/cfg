@@ -28,6 +28,7 @@ set shiftwidth=4
 "indentation helper
 set smartindent
 set autoindent
+set copyindent "copy the previous indentation on autoindenting
 "folding settings --> 'za' opens and closes folds
 set foldmethod=indent
 set foldlevel=99
@@ -41,24 +42,23 @@ set showmode
 set ignorecase
 "overrides ignorecase if searching pattern contains at least one uppercase character
 set smartcase
-"highlights previously searched patterns in the visible area
-set hlsearch
-"setting for autocompletion
-set wildmode=longest,list
-"display line numbers
-set number
+set hlsearch "highlights previously searched patterns in the visible area
+set wildmode=longest,list "setting for autocompletion
+set number "display line numbers
+set nobackup "no backup file is created
+set noswapfile "no swap file is created
+
 "css list of commands with ctrl+o and ctrl+x
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 "autocomplete improvement
 set completeopt=longest,menuone
 "color settings
 hi Comment ctermfg=Lightblue
-"plugins will be executed from .vim/plugins folder
-filetype plugin on
 
 
 "KEY MAPPINGS
 "============
+let mapleader = ","
 "remap 'jump to function definition' command to F3
 map <F3> <C-]>
 "remap TAB to change between tabs
@@ -69,12 +69,16 @@ map <S-TAB> <C-w><C-w>
 "also place a '}'
 inoremap {<CR> {<CR>}<Esc>O
 "nerdtree shortcut
-cnoremap nt NERDTree 
-
+nnoremap <Leader>nt :NERDTree<CR>
+"pydoc displaying document
+map <Leader>ii <Leader>pw
 
 "jquery plugin activator
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+au FileType python set omnifunc=pythoncomplete#Complete
 
+"plugins will be executed from .vim/plugins folder
+filetype plugin indent on
 
 "PLUGIN SPECIFIC SETTINGS
 "========================
@@ -92,3 +96,13 @@ let g:phpqa_codesniffer_autorun = 0
 "reset JSLint syntax highlighting
 hi clear SpellBad
 hi SpellBad cterm=underline,bold ctermfg=white ctermbg=red
+
+"synstastic
+"----------
+let g:syntastic_python_checker="flake8"
+"not working currently 
+"let g:syntastic_python_checker_args="--ignore=W191"
+
+"supertab
+"--------
+let g:SuperTabDefaultCompletionType = "context" "tab will use omnicompletion
