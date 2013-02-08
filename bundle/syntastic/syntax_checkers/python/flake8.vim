@@ -27,7 +27,7 @@ endfunction
 
 function! SyntaxCheckers_python_flake8_GetLocList()
     let makeprg = syntastic#makeprg#build({
-                \ 'exe': 'flake8',
+                \ 'exe': 'flake8 --ignore="W191"',
                 \ 'subchecker': 'flake8' })
     let errorformat = '%E%f:%l: could not compile,%-Z%p^,%E%f:%l:%c: %m,%W%f:%l: %m,%-G%.%#'
     return SyntasticMake({ 'makeprg': makeprg, 'errorformat': errorformat })
