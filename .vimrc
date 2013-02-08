@@ -43,15 +43,16 @@ set ignorecase
 "overrides ignorecase if searching pattern contains at least one uppercase character
 set smartcase
 set hlsearch "highlights previously searched patterns in the visible area
-set wildmode=longest,list "setting for autocompletion
+set wildmode=longest:list "setting for autocompletion
 set number "display line numbers
 set nobackup "no backup file is created
 set noswapfile "no swap file is created
+set nowritebackup
 
 "css list of commands with ctrl+o and ctrl+x
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 "autocomplete improvement
-set completeopt=longest,menuone
+set completeopt=longest,menuone,preview
 "color settings
 hi Comment ctermfg=Lightblue
 
@@ -63,8 +64,6 @@ let mapleader = ","
 map <F3> <C-]>
 "remap TAB to change between tabs
 map <C-TAB> gt
-"remap Shift-TAB to change between panes
-map <S-TAB> <C-w><C-w>
 "remap that when a '{' is placed and enter is pressed immediately, it will
 "also place a '}'
 inoremap {<CR> {<CR>}<Esc>O
@@ -72,6 +71,16 @@ inoremap {<CR> {<CR>}<Esc>O
 nnoremap <Leader>nt :NERDTree<CR>
 "pydoc displaying document
 map <Leader>ii <Leader>pw
+"split panel movement remapping
+map <c-h> <c-w>h
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+"tabulate selected blocks
+vnoremap < <gv
+vnoremap > >gv
+"ctrl-s saves file
+map <c-s> :w<CR> 
 
 "jquery plugin activator
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
@@ -105,4 +114,16 @@ let g:syntastic_python_checker="flake8"
 
 "supertab
 "--------
-let g:SuperTabDefaultCompletionType = "context" "tab will use omnicompletion
+let g:SuperTabDefaultCompletionType = "<c-p>" "tab will use the specified completion type
+let g:SuperTabLongestHighlight = 1 "automatically select the first entry in the list
+let g:SuperTabClosePreviewOnPopupClose = 1
+
+"ctrlP
+"-----
+let g:ctrlp_map = '<Leader>g'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_custom_ignore = {
+	\ 'dir': '\v[\/]\.(git|hg|svn)$',
+	\ 'file': '\v\.(exe|so|dll|mp3)$',
+	\}
+
