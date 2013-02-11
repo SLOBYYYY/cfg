@@ -79,6 +79,9 @@ map <c-l> <c-w>l
 "tabulate selected blocks
 vnoremap < <gv
 vnoremap > >gv
+"ctrl-s saves file
+nnoremap <Leader>w :w<CR> 
+nnoremap <Leader>q :q<CR> 
 
 "jquery plugin activator
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
