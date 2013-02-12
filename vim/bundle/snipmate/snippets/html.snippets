@@ -192,17 +192,20 @@ snippet textarea
 	<textarea name="${1:Name}" rows="${2:8}" cols="${3:40}">${4}</textarea>${5}
 snippet dtif
 	{% if ${1:condition} %}
+		${2}
 	{% endif %}
 snippet dtelse
 	{% else %}
 		${1}
 snippet dtfor
 	{% for ${1:variable} in ${2:list} %}
+		${3}
 	{% endfor %}
 snippet dtvar
 	{{ ${1:variable} }}
 snippet dtblock
 	{% block ${1:name} %}
+		${2}
 	{% endblock %}
 snippet dtext
 	{% extends "${1:name}" %}
