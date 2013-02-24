@@ -16,6 +16,7 @@ if !isdirectory(expand("~/.vim/swapfiles"))
 	endif
 endif
 set dir=~/.vim/swapfiles
+set term=xterm-256color
 
 "if possible, use syntax highlighting
 if has("syntax")
@@ -128,3 +129,6 @@ let g:ctrlp_custom_ignore = {
 	\ 'file': '\v\.(exe|so|dll|mp3)$',
 	\}
 
+"powerline
+"---------
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim

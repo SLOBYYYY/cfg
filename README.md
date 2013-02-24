@@ -9,6 +9,10 @@ Description:
  * .bashrc: Custom settings for bash
  * vim: Contains the folders and files for the .vim folder
 
+For vim powerline:
+------------------
+ Execute the install script in vimpowerline folder to copy the necessary files to the appropriate folders
+
 Inside "vim" folder
 -------------------
  * autoload: Only contains the pathogen vim plugin. It handles the plugins located inside directory "bundle"
