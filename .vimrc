@@ -128,7 +128,3 @@ let g:ctrlp_custom_ignore = {
 	\ 'dir': '\v[\/]\.(git|hg|svn)$',
 	\ 'file': '\v\.(exe|so|dll|mp3)$',
 	\}
-
-"powerline
-"---------
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
