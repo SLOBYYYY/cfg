@@ -23,6 +23,9 @@ if has("syntax")
 	syntax on
 endif
 
+"statusline
+set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+
 "tabulation settings
 set tabstop=4
 set shiftwidth=4
@@ -57,6 +60,13 @@ set completeopt=longest,menuone,preview
 "color settings
 hi Comment ctermfg=Lightblue
 
+"jquery plugin activator
+au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+au FileType python set omnifunc=pythoncomplete#Complete
+
+"this closes the preview window automatically after autocomplete is closed
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 "KEY MAPPINGS
 "============
@@ -70,8 +80,6 @@ map <C-TAB> gt
 inoremap {<CR> {<CR>}<Esc>O
 "nerdtree shortcut
 nnoremap <Leader>nt :NERDTree<CR>
-"pydoc displaying document
-map <Leader>ii <Leader>pw
 "split panel movement remapping
 map <c-h> <c-w>h
 map <c-j> <c-w>j
@@ -80,13 +88,13 @@ map <c-l> <c-w>l
 "tabulate selected blocks
 vnoremap < <gv
 vnoremap > >gv
-"ctrl-s saves file
+"leader-w saves file
 nnoremap <Leader>w :w<CR> 
 nnoremap <Leader>q :q<CR> 
 
-"jquery plugin activator
-au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
-au FileType python set omnifunc=pythoncomplete#Complete
+"rope remaps
+map <leader>g :call RopeGotoDefinition()<CR>
+map <leader>d :call RopeShowDoc()<CR>
 
 "plugins will be executed from .vim/plugins folder
 filetype plugin indent on
@@ -108,12 +116,6 @@ let g:phpqa_codesniffer_autorun = 0
 hi clear SpellBad
 hi SpellBad cterm=underline,bold ctermfg=white ctermbg=red
 
-"synstastic
-"----------
-let g:syntastic_python_checker="flake8"
-"not working currently 
-"let g:syntastic_python_checker_args="--ignore=W191"
-
 "supertab
 "--------
 let g:SuperTabDefaultCompletionType = "<c-p>" "tab will use the specified completion type
@@ -122,9 +124,35 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 
 "ctrlP
 "-----
-let g:ctrlp_map = '<Leader>g'
+let g:ctrlp_map = '<Leader>r'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = {
 	\ 'dir': '\v[\/]\.(git|hg|svn)$',
 	\ 'file': '\v\.(exe|so|dll|mp3)$',
 	\}
+
+"PYTHON-MODE
+"===========
+"pylint
+"------
+"set code checkers
+let g:pymode_lint_checker = "pyflakes,pep8,mccabe"
+
+"skip errors and warnings
+let g:pymode_lint_ignore = "W191"
+
+"open window on errors
+let g:pymode_lint_cwindow = 0
+
+"rope
+"----
+"dont guess the project folder location by itself
+let g:pymode_rope_guess_project = 0
+"provides additional information for autocomplete
+let g:pymode_rope_extended_complete = 1
+"use vim's complete function in insert mode
+let g:pymode_rope_vim_completion = 1
+"this prevents the autocomplete to select the first option by default
+let g:pymode_rope_always_show_complete_menu = 1
+"open new window upon goto definition command
+let g:pymode_rope_goto_def_newwin = "new"
