@@ -1,0 +1,62 @@
+#!/bin/bash
+echo -e "======= DEPLOYING SLOBY CONFIG FILES ======="
+read -p "Do you want to apply the configuration?" -n 1 -r
+if [ "$REPLY" == 'y' ]; then
+	echo -e "\nBacking up existing stuff ..."
+	if [ ! -d ~/cfgtemp ]; then
+		mkdir -v ~/cfgtemp
+	else
+		echo -e "\n~/cfgtemp already exists"
+	fi
+	if [ -d ~/cfgtemp ]; then
+		if [ -d ~/.vim ]; then
+			#if .vim directory exists, move it to a backup folder
+			mv -vf ~/.vim ~/cfgtemp/vimbak
+		fi
+		cp -v .vimrc ~/cfgtemp/vimrcbak
+		cp -v .gitconfig ~/cfgtemp/gitconfigbak
+		cp -v .bashrc ~/cfgtemp/bashrcbak
+		echo -e "\nBackup finished"
+	else
+		echo -e "\nBackup failed! Exiting"
+		exit
+	fi
+
+	echo -e "\nCopying .vim folder ..."
+	cp -r vim ~/.vim
+	if [ "$?" -ne 0 ]; then
+		#if copy was successful
+		mv ~/.vimbak ~/.vim
+	else
+		#if copy failed
+		rm -rf ~/.vimbak
+	fi
+	echo -e " Done"
+
+	echo -e "\nCopying .vimrc ..."
+	cp .vimrc ~/.vimrc
+	echo -e " Done"
+
+	echo -e "\nCopying .gitconfig ..."
+	cp .gitconfig ~/.gitconfig
+	echo -e " Done"
+
+	echo -e "\nCopying .bashrc ..."
+	cp .bashrc ~/.bashrc
+	echo -e " Done"
+
+	echo -e "\nCreating localized script folder ..."
+	if [ ! -d ~/.local ]; then
+		mkdir ~/.local
+	fi
+	if [ ! -d ~/.local/bin ]; then
+		mkdir ~/.local/bin
+	fi
+	echo " Done"
+
+	echo -e "\nCopying custom scripts to local script folder ..."
+	cp startdjangoproject ~/.local/bin
+	echo " Done"
+else
+	echo -e "\n======= Exiting! ======="
+fi

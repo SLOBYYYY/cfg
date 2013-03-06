@@ -20,6 +20,5 @@ Inside "vim" folder
 
 TODO:
 =====
-Add following plugins to vim:
- * powerline: `Powerline github<https://github.com/Lokaltog/powerline>`
- * rope: `Rope and additional stuff<https://github.com/klen/python-mode.git>`
+Try following plugins to vim:
+ * jedi: `Replacement for python-mode. Autocomplete is incredible (as they say!)`

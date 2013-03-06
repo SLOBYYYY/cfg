@@ -8,4 +8,4 @@ alias ..='cd ..'
 #PS1="\[$BLUE\][\u@\h]\[$RESET\] "
 
 #Path settings
-#export PATH="$PATH:/home/szabolcsm/.local/bin"
+export PATH="$PATH:/home/szabolcsm/.local/bin"
