@@ -9,3 +9,8 @@ alias ..='cd ..'
 
 #Path settings
 export PATH="$PATH:~/.local/bin"
+
+#virtualenvwrapper settings
+export WORKON_HOME=~/.local/virtualenvs
+export PROJECT_HOME=~/.local/virtualenv_project_home
+source /usr/local/bin/virtualenvwrapper.sh

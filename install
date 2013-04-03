@@ -55,7 +55,8 @@ if [ "$REPLY" == 'y' ]; then
 	echo " Done"
 
 	echo -e "\nCopying custom scripts to local script folder ..."
-	cp startdjangoproject ~/.local/bin
+	cp custom_scripts/startdjangoproject ~/.local/bin
+
 	echo " Done"
 else
 	echo -e "\n======= Exiting! ======="
