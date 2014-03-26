@@ -1,0 +1,7 @@
+#!/bin/sh
+JENKINS_URL="fmx-dev.hu/jenkins"
+USER="builder"
+# Token of user
+API_TOKEN="d63247f5fb34d93ad4c600d750fd4761"
+# Trigger remote build via REST API
+curl -u ${USER}:${API_TOKEN} -X POST http://${JENKINS_URL}/job/Farmmix%20taskmanager%20-%20Build/build
