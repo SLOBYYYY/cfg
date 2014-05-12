@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ "$#" -ne 1 ]; then
+	echo "Provide a package name to search for!"
+	exit
+fi
+sudo dpkg --get-selections | grep -v deinstall | grep $1 | awk '{print $1}'
