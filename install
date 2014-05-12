@@ -57,6 +57,7 @@ if [ "$REPLY" == 'y' ]; then
 	echo -e "\nCopying custom scripts to local script folder ..."
 	cp custom_scripts/startdjangoproject ~/.local/bin
 	cp custom_scripts/startmavenproject ~/.local/bin
+	cp custom_scripts/list_installed_packages ~/.local/bin
 
 	echo " Done"
 else
