@@ -92,23 +92,11 @@ vnoremap > >gv
 nnoremap <Leader>w :w<CR> 
 nnoremap <Leader>q :q<CR> 
 
-"rope remaps
-map <leader>g :call RopeGotoDefinition()<CR>
-map <leader>d :call RopeShowDoc()<CR>
-
 "plugins will be executed from .vim/plugins folder
 filetype plugin indent on
 
 "PLUGIN SPECIFIC SETTINGS
 "========================
-
-"vim-phpqa 
-"---------
-"messdetector requires a ruleset
-let g:phpqa_messdetector_ruleset = "~/.vim/config/phpmd.xml"
-"codesniffers standard setting
-let g:phpqa_codesniffer_args = "--report=csv --standard=PSR2"
-let g:phpqa_codesniffer_autorun = 0
 
 "jslint
 "------
@@ -143,16 +131,3 @@ let g:pymode_lint_ignore = "W191"
 
 "open window on errors
 let g:pymode_lint_cwindow = 0
-
-"rope
-"----
-"dont guess the project folder location by itself
-let g:pymode_rope_guess_project = 0
-"provides additional information for autocomplete
-let g:pymode_rope_extended_complete = 1
-"use vim's complete function in insert mode
-let g:pymode_rope_vim_completion = 1
-"this prevents the autocomplete to select the first option by default
-let g:pymode_rope_always_show_complete_menu = 1
-"open new window upon goto definition command
-let g:pymode_rope_goto_def_newwin = "new"
