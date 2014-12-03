@@ -58,6 +58,7 @@ if [ "$REPLY" == 'y' ]; then
 	cp custom_scripts/startdjangoproject ~/.local/bin
 	cp custom_scripts/startmavenproject ~/.local/bin
 	cp custom_scripts/list_installed_packages ~/.local/bin
+	cp custom_scripts/docker_cleanup_volumes.sh ~/.local/bin
 
 	echo " Done"
 else
