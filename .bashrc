@@ -10,6 +10,23 @@ alias grep="grep --color"
 alias ..='cd ..'
 alias doco='docker-compose'
 
+function askForSomething() {
+	while true; do
+		read -p "Removing every dangling image can be dangerous! Are you sure? (yn)" yn
+		case $yn in
+			[Yy]* ) eval $1; return;;
+			[Nn]* ) return;;
+			*) echo "Please press y or n.";;
+		esac
+	done
+}
+function removeDanglingImages() {
+	askForSomething "docker images -q -f \"dangling=true\" | xargs docker rmi"
+}
+
+function removeDanglingVolumes() {
+	askForSomething "docker volume ls -q -f dangling=true | xargs docker volume rm"
+}
 #Path settings
 export PATH="$PATH:~/.local/bin"
 export GRADLE_HOME="~/applications/gradle-2.13"
@@ -18,7 +35,10 @@ alias veramount='veracrypt /opt/memory.dump /storage/VirtualBox\ VMs/Multiple/'
 alias veraumount='veracrypt -d'
 alias dobash="docker exec -ti $1 /bin/bash"
 alias dopa="docker ps -a"
-alias docker-remove-dangling-images="docker images -q --filter \"dangling=true\" | xargs docker rmi"
+alias docker-list-dangling-images="docker images -q -f dangling=true"
+alias docker-list-dangling-volumes="docker volume ls -q -f dangling=true"
+alias docker-remove-dangling-images=removeDanglingImages
+alias docker-remove-dangling-volumes=removeDanglingVolumes
 alias gis="git status"
 alias gid="git diff"
 alias gidc="git diff --cached"
