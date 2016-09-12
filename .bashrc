@@ -21,11 +21,21 @@ function askForSomething() {
 	done
 }
 function removeDanglingImages() {
-	askForSomething "docker images -q -f \"dangling=true\" | xargs docker rmi"
+	IMAGE_COUNT=$(docker images -q -f \"dangling=true\" | wc -l)
+	if [[ $IMAGE_COUNT -gt 0 ]]; then
+		askForSomething "docker images -q -f \"dangling=true\" | xargs docker rmi"
+	else
+		echo "There are no dangling images"
+	fi
 }
 
 function removeDanglingVolumes() {
-	askForSomething "docker volume ls -q -f dangling=true | xargs docker volume rm"
+	VOLUME_COUNT=$(docker volume ls -q -f \"dangling=true\" | wc -l)
+	if [[ $VOLUME_COUNT -gt 0 ]]; then
+		askForSomething "docker volume ls -q -f dangling=true | xargs docker volume rm"
+	else
+		echo "There are no dangling volumes"
+	fi
 }
 #Path settings
 export PATH="$PATH:~/.local/bin"
